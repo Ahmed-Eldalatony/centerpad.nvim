@@ -1,6 +1,12 @@
 # centerpad.nvim
 
-This fork is tailored for personal use from [smithbm2316/centerpad.nvim](https://github.com/smithbm2316/centerpad.nvim)
+This fork is tailored for personal needs use from [smithbm2316/centerpad.nvim](https://github.com/smithbm2316/centerpad.nvim)
+
+**Differences from original**
+
+- writing the left and right pads is disabled and insert mode is no longer accepted when scratch buffers are active
+- Error message from trying to run when more than 1 buffer is open is removed.
+- Padding is no longer limited to 1 one buffer at the time so technically you can use now use this to add two windows on both sides of buffer
 
 ## Center your single lonely buffer easily!
 
