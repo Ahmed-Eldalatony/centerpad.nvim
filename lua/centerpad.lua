@@ -6,6 +6,7 @@ local center_buf = {}
 local turn_on = function(config)
   -- Get reference to current_buffer
   local main_win = v.nvim_get_current_win()
+  local main_buffer = v.nvim_get_current_buf()
 
   -- get the user's current options for split directions
   local useropts = {
@@ -14,8 +15,7 @@ local turn_on = function(config)
   }
 
   -- Make sure that the user doesn't have more than one window/buffer open at the moment
-  if #v.nvim_tabpage_list_wins(0) > 1 then
-    print('Please only have one window and buffer open')
+  if #v.nvim_tabpage_list_wins(0) > 2 then
     return
   end
 
@@ -23,15 +23,21 @@ local turn_on = function(config)
   vim.o.splitright = false
   vim.cmd(string.format('%svnew', config.leftpad))
   local leftpad = v.nvim_get_current_buf()
+  vim.opt_local.relativenumber = false
   v.nvim_buf_set_name(leftpad, 'leftpad')
+  v.nvim_buf_set_option(leftpad, "buftype", "acwrite")
+  v.nvim_buf_set_option(leftpad, "modifiable", false)
   v.nvim_set_current_win(main_win)
 
   -- create scratch window to the right
   vim.o.splitright = true
   vim.cmd(string.format('%svnew', config.rightpad))
   local rightpad = v.nvim_get_current_buf()
+  vim.opt_local.relativenumber = false
   v.nvim_buf_set_name(rightpad, 'rightpad')
-  v.nvim_set_current_win(main_win)
+  v.nvim_buf_set_option(rightpad, "buftype", "acwrite")
+  v.nvim_buf_set_option(rightpad, "modifiable", false)
+  
 
   -- keep track of the current state of the plugin
   vim.g.center_buf_enabled = true
@@ -39,6 +45,10 @@ local turn_on = function(config)
   -- reset the user's split opts
   vim.o.splitbelow = useropts.splitbelow
   vim.o.splitright = useropts.splitright
+
+  v.nvim_set_current_win(main_win)
+  v.nvim_set_current_buf(main_buffer)
+
 end
 
 -- function to toggle zen mode off
@@ -68,6 +78,19 @@ local turn_off = function(config)
 end
 
 -- function for user to run, toggling on/off
+center_buf.turn_off = function(config)
+  if vim.g.center_buf_enabled == true then
+    turn_off(config)
+  end
+end
+
+center_buf.turn_on = function(config)
+  config = config or { leftpad = 36, rightpad = 36 }
+  if not vim.g.center_buf_enabled then
+    turn_on(config)
+  end
+end
+
 center_buf.toggle = function(config)
   -- set default options
   config = config or { leftpad = 36, rightpad = 36 }
