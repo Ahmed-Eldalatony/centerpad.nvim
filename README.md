@@ -1,5 +1,7 @@
 # centerpad.nvim
 
+This fork is tailored for personal use from [smithbm2316/centerpad.nvim](https://github.com/smithbm2316/centerpad.nvim)
+
 ## Center your single lonely buffer easily!
 
 Are you only working on one file in your current neovim session? Do you have a big monitor and have to look *all the way* to the left of your screen to see your code? centerpad.nvim is here to help you easily center your code in the middle of your screen!
