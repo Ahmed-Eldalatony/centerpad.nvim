@@ -25,6 +25,7 @@ local turn_on = function(config)
   local leftpad = v.nvim_get_current_buf()
   vim.opt_local.relativenumber = false
   v.nvim_buf_set_name(leftpad, 'leftpad')
+  v.nvim_buf_set_option(leftpad, "buflisted", false)
   v.nvim_buf_set_option(leftpad, "buftype", "acwrite")
   v.nvim_buf_set_option(leftpad, "modifiable", false)
   v.nvim_set_current_win(main_win)
@@ -35,9 +36,10 @@ local turn_on = function(config)
   local rightpad = v.nvim_get_current_buf()
   vim.opt_local.relativenumber = false
   v.nvim_buf_set_name(rightpad, 'rightpad')
+  v.nvim_buf_set_option(rightpad, "buflisted", false)
   v.nvim_buf_set_option(rightpad, "buftype", "acwrite")
   v.nvim_buf_set_option(rightpad, "modifiable", false)
-  
+
 
   -- keep track of the current state of the plugin
   vim.g.center_buf_enabled = true
@@ -48,7 +50,6 @@ local turn_on = function(config)
 
   v.nvim_set_current_win(main_win)
   v.nvim_set_current_buf(main_buffer)
-
 end
 
 -- function to toggle zen mode off
@@ -104,7 +105,7 @@ center_buf.toggle = function(config)
 end
 
 center_buf.run_command = function(...)
-  local args = {...}
+  local args = { ... }
   if #args == 1 then
     center_buf.toggle { leftpad = args[1], rightpad = args[1] }
   elseif #args == 2 then
