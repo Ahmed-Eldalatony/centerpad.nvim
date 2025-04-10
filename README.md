@@ -20,17 +20,17 @@ Use your favorite package manager to install, here is how to install with a few 
 
 ```lua
 -- packer.nvim
-use { 'smithbm2316/centerpad.nvim' }
+use { 'Ahmed-Eldalatony/centerpad.nvim' }
 ```
 
 ```lua
 -- paq.nvim
-paq 'smithbm2316/centerpad.nvim'
+paq 'Ahmed-Eldalatony/centerpad.nvim'
 ```
 
 ```vim
 " vim-plug
-Plug 'smithbm2316/centerpad.nvim'
+Plug 'Ahmed-Eldalatony/centerpad.nvim'
 ```
 
 ## Why centerpad.nvim?
